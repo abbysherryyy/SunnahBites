@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner - SunnahBites</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="logo">
+                <div class="logo-icon">🍯📖</div>
+                <div class="logo-text">
+                    <span class="logo-main">SunnahBites</span>
+                    <span class="logo-tagline">Bites of Barakah</span>
+                </div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="search.html" class="nav-link">Search Recipes</a>
+            <a href="planner.html" class="nav-link active">Meal Planner</a>
+        </div>
+    </nav>
+
+    <main class="planner-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2>Your Sunnah Meal Planner</h2>
+            <p>Plan your daily meals with blessed Sunnah foods 🌟</p>
+        </div>
+    
+
+        <!-- Calendar View -->
+        <section class="calendar-section">
+            <div class="calendar-header">
+                <h3 id="current-month">October 2024</h3>
+                <div class="calendar-nav">
+                    <button class="btn btn-outline" onclick="changeMonth(-1)">← Previous</button>
+                    <button class="btn btn-outline" onclick="goToToday()">Today</button>
+                    <button class="btn btn-outline" onclick="changeMonth(1)">Next →</button>
+                </div>
+            </div>
+            
+            <div class="calendar-grid" id="calendar-grid">
+                <!-- Calendar days will be generated dynamically -->
+            </div>
+        </section>
+
+        <!-- Floating Stars Container -->
+        <div id="stars-container" class="stars-container"></div>
+
+        <!-- Empty State -->
+        <section id="planner-empty" class="planner-empty">
+            <div class="empty-icon">📅</div>
+            <h3>Plan Your Daily Meal</h3>
+            <p>Click on any date in the calendar to start planning your meals!</p>
+            <div class="empty-tips">
+                <div class="tip">🍽️ Add recipes from the search page</div>
+                <div class="tip">📝 Plan breakfast, lunch, and dinner</div>
+                <div class="tip">💾 Your plans save automatically</div>
+                <div class="tip">⭐ Click floating stars for Sunnah facts!</div>
+            </div>
+        </section>
+
+        <!-- Slide-up Daily Planner Panel -->
+        <div id="daily-panel" class="daily-panel">
+            <div class="panel-header">
+                <div class="panel-drag-handle"></div>
+                <h3 id="panel-date">Monday, October 30</h3>
+                <button class="panel-close" onclick="closeDailyPanel()">×</button>
+            </div>
+            
+            <div class="panel-content">
+                <!-- Quick Actions -->
+                <div class="panel-actions">
+                    <button class="btn btn-outline" onclick="clearDayPlan()">
+                        🗑️ Clear Day
+                    </button>
+                </div>
+
+                <!-- Meal Timeline -->
+                <div class="meal-timeline">
+                    <div class="meal-slot" data-meal="breakfast">
+                        <div class="meal-header">
+                            <div class="meal-time-icon">🌅</div>
+                            <div class="meal-info">
+                                <h4>Breakfast</h4>
+                                <span class="meal-time">7:00 AM</span>
+                            </div>
+                            <button class="btn-edit" onclick="openMealEditor('breakfast')">✏️</button>
+                        </div>
+                        <div class="meal-content" id="breakfast-slot">
+                            <div class="empty-meal">
+                                <p>No meal planned</p>
+                                <button class="btn btn-small" onclick="openRecipePicker('breakfast')">Add Recipe</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-slot" data-meal="lunch">
+                        <div class="meal-header">
+                            <div class="meal-time-icon">☀️</div>
+                            <div class="meal-info">
+                                <h4>Lunch</h4>
+                                <span class="meal-time">1:00 PM</span>
+                            </div>
+                            <button class="btn-edit" onclick="openMealEditor('lunch')">✏️</button>
+                        </div>
+                        <div class="meal-content" id="lunch-slot">
+                            <div class="empty-meal">
+                                <p>No meal planned</p>
+                                <button class="btn btn-small" onclick="openRecipePicker('lunch')">Add Recipe</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="meal-slot" data-meal="dinner">
+                        <div class="meal-header">
+                            <div class="meal-time-icon">🌙</div>
+                            <div class="meal-info">
+                                <h4>Dinner</h4>
+                                <span class="meal-time">7:00 PM</span>
+                            </div>
+                            <button class="btn-edit" onclick="openMealEditor('dinner')">✏️</button>
+                        </div>
+                        <div class="meal-content" id="dinner-slot">
+                            <div class="empty-meal">
+                                <p>No meal planned</p>
+                                <button class="btn btn-small" onclick="openRecipePicker('dinner')">Add Recipe</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Notes -->
+                <div class="daily-notes">
+                    <h4>📝 Daily Notes</h4>
+                    <textarea id="daily-notes" placeholder="Add notes for this day (shopping list, reminders, special instructions...)..." rows="3"></textarea>
+                    <div class="notes-footer">
+                        <span class="auto-save-indicator">💾 Auto-saved</span>
+                        <span class="notes-count">0/500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay for panel -->
+        <div id="panel-overlay" class="panel-overlay" onclick="closeDailyPanel()"></div>
+
+        <!-- Recipe Picker Modal -->
+        <div id="recipe-picker" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeRecipePicker()">&times;</span>
+                <h3>Choose a Recipe for <span id="picker-meal-type">Breakfast</span></h3>
+                
+                <div class="picker-tabs">
+                    <button class="picker-tab active" onclick="switchPickerTab('saved')">Saved Recipes</button>
+                    <button class="picker-tab" onclick="switchPickerTab('search')">Search New</button>
+                </div>
+                
+                <div id="saved-recipes-tab" class="picker-tab-content active">
+                    <div id="saved-recipes-list" class="recipe-picker-list">
+                        <!-- Saved recipes will appear here -->
+                    </div>
+                    <div id="no-saved-recipes" class="empty-state-small">
+                        <p>No saved recipes yet.</p>
+                        <a href="search.html" class="btn btn-small">Find Recipes</a>
+                    </div>
+                </div>
+                
+                <div id="search-recipes-tab" class="picker-tab-content">
+                    <div class="quick-search">
+                        <select id="quick-ingredient-select" class="search-select">
+                            <option value="">Quick search by ingredient...</option>
+                            <option value="dates">Dates</option>
+                            <option value="olives">Olives</option>
+                            <option value="honey">Honey</option>
+                            <option value="milk">Milk</option>
+                        </select>
+                        <button class="btn btn-small" onclick="quickSearchRecipes()">Search</button>
+                    </div>
+                    <div id="quick-results" class="recipe-picker-list">
+                        <!-- Quick search results will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meal Editor Modal -->
+        <div id="meal-editor" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeMealEditor()">&times;</span>
+                <h3>Edit <span id="editor-meal-type">Breakfast</span></h3>
+                
+                <div class="editor-actions">
+                    <button class="btn btn-outline" onclick="removeCurrentMeal()">
+                        🗑️ Remove Meal
+                    </button>
+                </div>
+                
+                <div class="current-meal-info" id="current-meal-info">
+                    <!-- Current meal details will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Star Fact Modal -->
+        <div id="star-modal" class="modal star-modal" style="display: none;">
+            <div class="modal-content">
+                <div class="star-modal-header">
+                    <span class="star-emoji">⭐</span>
+                    <h3>Sunnah Bite!</h3>
+                </div>
+                <div class="star-content" id="star-content">
+                    <!-- Star fact content will appear here -->
+                </div>
+                <button class="btn btn-primary" onclick="closeStarModal()">Nice! ✨</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="planner.js"></script>
+</body>
+</html>

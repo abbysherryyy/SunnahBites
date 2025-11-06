@@ -1,0 +1,22 @@
+{
+  "name": "sunnahbites",
+  "version": "1.0.0",
+  "description": "A meal planning app based on Sunnah foods",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --debug"
+  },
+  "keywords": [
+    "electron",
+    "sunnah",
+    "meal",
+    "recipes",
+    "halal"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^27.0.0"
+  }
+}

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Recipes - SunnahBites</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <div class="logo">
+                <div class="logo-icon">🍯📖</div>
+                <div class="logo-text">
+                    <span class="logo-main">SunnahBites</span>
+                    <span class="logo-tagline">Bites of Barakah</span>
+                </div>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="search.html" class="nav-link active">Search Recipes</a>
+            <a href="planner.html" class="nav-link">Meal Planner</a>
+        </div>
+    </nav>
+
+    <main class="search-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h2>Discover Sunnah Recipes</h2>
+            <p>Combine multiple Sunnah ingredients for delicious, healthy meals</p>
+        </div>
+        
+        <!-- Search & Filter Section -->
+        <section class="search-section">
+            <!-- Sunnah Ingredients Multi-Select -->
+            <div class="ingredients-selector">
+                <h3>Choose Sunnah Ingredients</h3>
+                <p>Select one or more ingredients (at least 1 required)</p>
+                
+                <div class="ingredients-grid">
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="dates">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🍇 Dates</span>
+                    </label>
+                    
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="olives">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🫒 Olives</span>
+                    </label>
+                    
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="honey">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🍯 Honey</span>
+                    </label>
+                    
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="milk">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🥛 Milk</span>
+                    </label>
+                    
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="barley">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🌾 Barley</span>
+                    </label>
+                    
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="pomegranate">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🍎 Pomegranate</span>
+                    </label>
+                    
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="figs">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🍐 Figs</span>
+                    </label>
+                    
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="grapes">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🍇 Grapes</span>
+                    </label>
+                    
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="melon">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🍈 Melon</span>
+                    </label>
+                    
+                    <label class="ingredient-checkbox">
+                        <input type="checkbox" name="sunnah-ingredient" value="cucumber">
+                        <span class="checkmark"></span>
+                        <span class="ingredient-name">🥒 Cucumber</span>
+                    </label>
+                </div>
+                
+                <!-- Selected Ingredients Display -->
+                <div id="selected-ingredients" class="selected-ingredients">
+                    <span class="selected-label">Selected:</span>
+                    <div id="selected-tags" class="selected-tags">
+                        <!-- Selected ingredients will appear here as tags -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Ingredient Search -->
+            <div class="custom-search">
+                <h3>Add Custom Ingredients (Optional)</h3>
+                <div class="search-input-group">
+                    <input type="text" id="custom-ingredient" placeholder="Type additional ingredients (chicken, rice, etc.)" class="search-input">
+                    <button type="button" class="btn btn-small" onclick="addCustomIngredient()">Add</button>
+                </div>
+                <div id="custom-tags" class="selected-tags">
+                    <!-- Custom ingredients will appear here as tags -->
+                </div>
+            </div>
+
+            <!-- Search Button -->
+            <div class="search-actions">
+                <button id="search-btn" class="btn btn-primary btn-large">
+                    <span class="btn-text">🔍 Search Recipes</span>
+                    <span class="btn-loading" style="display: none;">Searching...</span>
+                </button>
+            </div>
+            
+            <div class="filter-info">
+                <span class="halal-badge">🕌 Halal Filter Active</span>
+                <p>Automatically filtering out non-halal ingredients</p>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <div id="results-grid" class="results-grid">
+                <!-- Dynamic content will go here -->
+                <div class="empty-state">
+                    <div class="empty-icon">🔍</div>
+                    <h3>Ready to Discover Amazing Recipes?</h3>
+                    <p>Select Sunnah ingredients above to find delicious recipes!</p>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loading-state" class="loading-state" style="display: none;">
+                <div class="loading-spinner"></div>
+                <p>Searching for halal recipes...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-state" class="error-state" style="display: none;">
+                <div class="error-icon">⚠️</div>
+                <h3>Oops! Something went wrong</h3>
+                <p id="error-message">We couldn't fetch recipes at the moment. Please try again.</p>
+                <button class="btn btn-secondary" onclick="retrySearch()">Try Again</button>
+            </div>
+        </section>
+
+        <!-- Recipe Detail Modal -->
+        <div id="recipe-modal" class="modal" style="display: none;">
+            <div class="modal-content recipe-modal-content">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <div id="modal-recipe-content">
+                    <!-- Detailed recipe info will go here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="search.js"></script>
+</body>
+</html>
