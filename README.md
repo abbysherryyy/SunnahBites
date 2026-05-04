@@ -1,33 +1,33 @@
 ```markdown
-# ?? SunnahBites - Sunnah Meal Planner
+# SunnahBites - Sunnah Meal Planner
 
 [![Electron](https://img.shields.io/badge/Electron-?-brightgreen)](https://www.electronjs.org/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-## ?? Project Overview
+## Project Overview
 
-**SunnahBites** is a desktop application that helps Muslims discover halal recipes using Sunnah-inspired ingredients (dates, honey, olives, barley) and plan weekly meals.
+SunnahBites is a desktop application that helps Muslims discover halal recipes using Sunnah-inspired ingredients (dates, honey, olives, barley) and plan weekly meals.
 
-Built with **Electron.js** during my Diploma in Computer Science.
+Built with Electron.js during my Diploma in Computer Science.
 
-## ??? Technologies Used
+## Technologies Used
 
-- **Electron.js** - Cross-platform desktop framework
-- **JavaScript (ES6+)** - Core programming language
-- **HTML5 & CSS3** - User interface design
-- **Spoonacular API** - Recipe data integration
-- **File System (fs)** - Local data persistence
+- Electron.js - Cross-platform desktop framework
+- JavaScript (ES6+) - Core programming language
+- HTML5 & CSS3 - User interface design
+- Spoonacular API - Recipe data integration
+- File System (fs) - Local data persistence
 
-## ? Features
+## Features
 
-- ?? Search recipes using Sunnah ingredients
-- ?? Automatic halal filtering (no pork, alcohol, gelatin)
-- ?? Weekly meal planner with full CRUD operations
-- ?? Local data persistence (saves between sessions)
-- ?? Educational Sunnah facts and quotes
+- Search recipes using Sunnah ingredients
+- Automatic halal filtering (no pork, alcohol, gelatin)
+- Weekly meal planner with full CRUD operations
+- Local data persistence (saves between sessions)
+- Educational Sunnah facts and quotes
 
-## ?? How to Run
+## How to Run
 
 ```bash
 git clone https://github.com/abbysherryyy/sunnahbites.git
@@ -36,7 +36,7 @@ npm install
 npm start
 ```
 
-## ?? Project Structure
+## Project Structure
 
 ```
 SunnahBites/
@@ -56,25 +56,12 @@ SunnahBites/
 +-- demo-screenshots/       # App screenshots
 ```
 
-## ?? License
+## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-Built with ?? for the Ummah
+Built with love for the Ummah
 ```
 
----
-
-## Then:
-
-1. **Save the file** (Ctrl+S)
-2. **Close Notepad**
-3. **Run these commands** in your terminal:
-
-```bash
-git add README.md
-git commit -m "Fix README with correct username"
-git push origin main
-```
